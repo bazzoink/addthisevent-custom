@@ -1,0 +1,5 @@
+{
+    "name": "addthisevent-custom",
+    "version": "0.0.1",
+    "main": "./addthisevent.js"
+}

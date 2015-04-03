@@ -51,60 +51,74 @@ var addthisevent = function() {
                 var f = false;
                 var g = '';
                 var h = b[d].className;
-                if (h == 'addthisevent') {
+                // if (h == 'addthisevent') {
+                if (addthisevent.hasclass(b[d], 'addthisevent')) {
                     var i = b[d].getElementsByTagName('span');
                     for (var m = 0; m < i.length; m += 1) {
-                        if (i[m].className == '_url') {
+                        // if (i[m].className == '_url') {
+                        if (addthisevent.hasclass(i[m], '_url')) {
                             i[m].style.display = 'none';
                             var j = i[m].innerHTML.replace(/ /gi, "");
                             c += '&durl=' + encodeURIComponent(j);
                             g = j
                         }
-                        if (i[m].className == '_start') {
+                        // if (i[m].className == '_start') {
+                        if (addthisevent.hasclass(i[m], '_start')) {
                             i[m].style.display = 'none';
                             c += '&dstart=' + encodeURIComponent(i[m].innerHTML)
                         }
-                        if (i[m].className == '_end') {
+                        // if (i[m].className == '_end') {
+                        if (addthisevent.hasclass(i[m], '_end')) {
                             i[m].style.display = 'none';
                             c += '&dend=' + encodeURIComponent(i[m].innerHTML)
                         }
-                        if (i[m].className == '_zonecode') {
+                        // if (i[m].className == '_zonecode') {
+                        if (addthisevent.hasclass(i[m], '_zonecode')) {
                             i[m].style.display = 'none';
                             c += '&dzone=' + encodeURIComponent(i[m].innerHTML)
                         }
-                        if (i[m].className == '_summary') {
+                        // if (i[m].className == '_summary') {
+                        if (addthisevent.hasclass(i[m], '_summary')) {
                             i[m].style.display = 'none';
                             c += '&dsum=' + encodeURIComponent(i[m].innerHTML)
                         }
-                        if (i[m].className == '_description') {
+                        // if (i[m].className == '_description') {
+                        if (addthisevent.hasclass(i[m], '_description')) {
                             i[m].style.display = 'none';
                             c += '&ddesc=' + encodeURIComponent(i[m].innerHTML)
                         }
-                        if (i[m].className == '_location') {
+                        // if (i[m].className == '_location') {
+                        if (addthisevent.hasclass(i[m], '_location')) {
                             i[m].style.display = 'none';
                             c += '&dloca=' + encodeURIComponent(i[m].innerHTML)
                         }
-                        if (i[m].className == '_organizer') {
+                        // if (i[m].className == '_organizer') {
+                        if (addthisevent.hasclass(i[m], '_organizer')) {
                             i[m].style.display = 'none';
                             c += '&dorga=' + encodeURIComponent(i[m].innerHTML)
                         }
-                        if (i[m].className == '_organizer_email') {
+                        // if (i[m].className == '_organizer_email') {
+                        if (addthisevent.hasclass(i[m], '_organizer_email')) {
                             i[m].style.display = 'none';
                             c += '&dorgaem=' + encodeURIComponent(i[m].innerHTML)
                         }
-                        if (i[m].className == '_all_day_event') {
+                        // if (i[m].className == '_all_day_event') {
+                        if (addthisevent.hasclass(i[m], '_all_day_event')) {
                             i[m].style.display = 'none';
                             c += '&dallday=' + encodeURIComponent(i[m].innerHTML)
                         }
-                        if (i[m].className == '_date_format') {
+                        // if (i[m].className == '_date_format') {
+                        if (addthisevent.hasclass(i[m], '_date_format')) {
                             i[m].style.display = 'none';
                             c += '&dateformat=' + encodeURIComponent(i[m].innerHTML)
                         }
-                        if (i[m].className == '_uid') {
+                        // if (i[m].className == '_uid') {
+                        if (addthisevent.hasclass(i[m], '_uid')) {
                             i[m].style.display = 'none';
                             c += '&uid=' + encodeURIComponent(i[m].innerHTML)
                         }
-                        if (i[m].className == '_facebook_event') {
+                        // if (i[m].className == '_facebook_event') {
+                        if (addthisevent.hasclass(i[m], '_facebook_event')) {
                             if (i[m].innerHTML != '') {
                                 i[m].style.display = 'none';
                                 var k = i[m].innerHTML.replace(/ /gi, "");
@@ -142,7 +156,10 @@ var addthisevent = function() {
                         l += '<em class="copyx"><em class="brx"></em><em class="frs" onclick="addthisevent.cli(\'home\');">AddThisEvent</em></em>'
                     }
                     b[d].id = 'atedrop' + dropzcx;
-                    b[d].className = 'addthisevent-drop';
+                    // b[d].className = 'addthisevent-drop';
+                    b[d].className = b[d].className.replace(/addthisevent/gi, '');
+                    b[d].className = b[d].className + ' addthisevent-drop';
+
                     b[d].title = '';
                     if (_ate_mouse) {
                         b[d].onmouseover = function() {
@@ -287,7 +304,8 @@ var addthisevent = function() {
                     }
                 } else {
                     olddrop = c;
-                    d.className = 'addthisevent-drop addthisevent-selected';
+                    // d.className = 'addthisevent-drop addthisevent-selected';
+                    d.className = d.className + ' addthisevent-selected';
                     d.style.zIndex = dropzind++;
                     g.style.left = '0px';
                     g.style.top = '0px';
@@ -386,7 +404,8 @@ var addthisevent = function() {
             var a = $d(f);
             var b = $d(f + '-drop');
             if (a && b) {
-                a.className = 'addthisevent-drop';
+                // a.className = 'addthisevent-drop';
+                a.className = a.className.replace(/addthisevent-selected/gi, '');
                 b.style.display = 'none';
                 b.style.zIndex = ''
             }
@@ -468,6 +487,14 @@ var addthisevent = function() {
             return c
         },
         refresh: function() {
+            var a = document.getElementsByTagName('*');
+            for (var d = 0; d < a.length; d += 1) {
+                if (addthisevent.hasclass(a[d], 'addthisevent-drop')) {
+                    a[d].className = a[d].className.replace(/addthisevent-drop/gi, '');
+                    a[d].className = a[d].className.replace(/addthisevent/gi, '');
+                    a[d].className = a[d].className + ' addthisevent'
+                }
+            }
             addthisevent.generate()
         },
         callcack: function(f) {
@@ -568,20 +595,24 @@ var addthisevent = function() {
             if (c.callback != undefined) {
                 _ate_callback = c.callback
             }
+        },
+        hasclass: function(e, c) {
+            return new RegExp('(\\s|^)' + c + '(\\s|$)').test(e.className)
         }
     }
 }();
 addthisevent.trycss();
-if (window.addEventListener) {
-    window.addEventListener("load", function() {
-        addthisevent.generate()
-    }, false)
-} else if (window.attachEvent) {
-    window.attachEvent("onload", function() {
-        addthisevent.generate()
-    })
-} else {
-    window.onload = function() {
-        addthisevent.generate()
-    }
-}
+
+// if (window.addEventListener) {
+//     window.addEventListener("load", function() {
+//         addthisevent.generate()
+//     }, false)
+// } else if (window.attachEvent) {
+//     window.attachEvent("onload", function() {
+//         addthisevent.generate()
+//     })
+// } else {
+//     window.onload = function() {
+//         addthisevent.generate()
+//     }
+// }
